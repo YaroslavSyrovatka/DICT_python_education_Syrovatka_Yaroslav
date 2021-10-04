@@ -16,3 +16,20 @@ while x <= y:
     print(str(x)+"!")
     x += 1
 print("Completed, have a nice day!")
+line_q = """Let's test your programming knowledge.
+What is PEP (Python Enhancement Proposal)?
+1. These are python development suggestions
+2. This is a function operator
+3. This is a type of compiler
+4. this is a labor exchange for programmers
+"""
+print(line_q)
+s = int(input(">"))
+while True:
+    if s == 1:
+        print("Completed, have a nice day!")
+        break
+    else:
+        print("Please, try again.")
+        s = int(input(">"))
+print("Congratulations, have a nice day!")
