@@ -144,3 +144,17 @@ def stag_6():
         # print("Thanks for playing!\nWe'll see how well you did in the next stage")
 
 # stag_6()
+
+
+def stag_7():
+    chose = input("Type play to play the game, exit to quit:>")
+    if chose == "play":
+        stag_6()
+        return stag_7()
+    elif chose == "exit":
+        exit()
+    else:
+        return stag_7()
+
+
+stag_7()
