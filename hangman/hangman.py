@@ -72,3 +72,36 @@ def stag_4():
 
 
 # stag_4()
+
+def stag_5():
+    words = ["space", "human", "woman", "bulldozer"]
+    word = random.choice(words)
+    under = "_" * len(word)
+    guessed = False
+    tries = 8
+    guessed_letters = []
+    print(under)
+    while not guessed and tries > 0:
+        guess = input("Input a letter: >").lower()
+        if len(guess) == 1:
+            if guess in word:
+                if guess in guessed_letters:
+                    tries -= 1
+                    print("No improvements")
+                guessed_letters.append(guess)
+                word_as_list = list(under)
+                indices = [i for i, letter in enumerate(word) if letter == guess]
+                for index in indices:
+                    word_as_list[index] = guess
+                under = "".join(word_as_list)
+                print(under)
+                if "_" not in under:
+                    guessed = True
+                    print("The word is", word, "\nYou win")
+            else:
+                tries -= 1
+                print("That letter doesn't appear in the word")
+    else:
+        print("Thanks for playing!\nWe'll see how well you did in the next stage")
+
+# stag_5()
