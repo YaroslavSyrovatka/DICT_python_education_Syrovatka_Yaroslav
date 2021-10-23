@@ -105,3 +105,42 @@ def stag_5():
         print("Thanks for playing!\nWe'll see how well you did in the next stage")
 
 # stag_5()
+
+
+def stag_6():
+    words = ["space", "human", "woman", "bulldozer"]
+    word = random.choice(words)
+    under = "_" * len(word)
+    guessed = False
+    tries = 8
+    guessed_letters = []
+    print(under)
+    while not guessed and tries > 0:
+        guess = input("Input a letter: >")
+        if len(guess) == 1:
+            if guess.islower() and guess.isalpha():
+                if guess in word:
+                    if guess in guessed_letters:
+                        print("You've already guessed this letter.")
+                    guessed_letters.append(guess)
+                    word_as_list = list(under)
+                    indices = [i for i, letter in enumerate(word) if letter == guess]
+                    for index in indices:
+                        word_as_list[index] = guess
+                    under = "".join(word_as_list)
+                    print(under)
+                    if "_" not in under:
+                        print("You guessed the word", word, "!\nYou survived!")
+                        break
+                else:
+                    tries -= 1
+                    print("That letter doesn't appear in the word")
+            else:
+                print("Please enter a lowercase English letter.")
+        else:
+            print("You should input a single letter.")
+    else:
+        print("The word is", word, "!\nYou lost")
+        # print("Thanks for playing!\nWe'll see how well you did in the next stage")
+
+# stag_6()
