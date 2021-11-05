@@ -39,6 +39,80 @@
 #
 #
 # stage_3()
+# water = 400
+# milk = 540
+# coffee = 120
+# cups = 9
+# money = 550
+#
+#
+# def ingredents():
+#     print("The coffee machine has:\n", water, "of water\n", milk, "of milk\n", coffee, "of coffee beans\n", cups,
+#           "of disposable cups\n", money, "of money")
+#     return input("Write action (buy, fill, take):\n>")
+#
+#
+# def buys():
+#     global water, milk, coffee, cups, money
+#     z = int(input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:\n>"))
+#     if z == 1:
+#         water = water - 250
+#         coffee = coffee - 16
+#         cups = cups - 1
+#         money = money + 4
+#         print("The coffee machine has:\n", water, "of water\n", milk, "of milk\n", coffee, "of coffee beans\n",
+#               cups, "of disposable cups\n", money, "of money")
+#     if z == 2:
+#         water = water - 350
+#         milk = milk - 75
+#         coffee = coffee - 20
+#         cups = cups - 1
+#         money = money + 7
+#         print("The coffee machine has:\n", water, "of water\n", milk, "of milk\n", coffee, "of coffee beans\n",
+#               cups, "of disposable cups\n", money, "of money")
+#     if z == 3:
+#         water = water - 200
+#         milk = milk - 100
+#         coffee = coffee - 12
+#         cups = cups - 1
+#         money = money + 6
+#         print("The coffee machine has:\n", water, "of water\n", milk, "of milk\n", coffee, "of coffee beans\n",
+#               cups, "of disposable cups\n", money, "of money")
+#
+#
+# def fills():
+#     global water, milk, coffee, cups, money
+#     c = int(input("Write how many ml of water you want to add:\n>"))
+#     water = water + c
+#     v = int(input("Write how many ml of milk you want to add:\n>"))
+#     milk = milk + v
+#     b = int(input("Write how many grams of coffee beans you want to add:\n>"))
+#     coffee = coffee + b
+#     n = int(input("Write how many disposable coffee cups you want to add:\n>"))
+#     cups = cups + n
+#     print("The coffee machine has:\n", water, "of water\n", milk, "of milk\n", coffee, "of coffee beans\n", cups,
+#           "of disposable cups\n", money, "of money")
+#
+#
+# def takes():
+#     global water, milk, coffee, cups, money
+#     print("I gave you", money,)
+#     money = money - money
+#     print("The coffee machine has:\n", water, "of water\n", milk, "of milk\n", coffee, "of coffee beans\n", cups,
+#           "of disposable cups\n", money, "of money")
+#
+#
+# def main():
+#     ing = ingredents()
+#     if ing == "buy":
+#         buys()
+#     elif ing == "fill":
+#         fills()
+#     elif ing == "take":
+#         takes()
+#
+#
+# main()
 water = 400
 milk = 540
 coffee = 120
@@ -47,37 +121,64 @@ money = 550
 
 
 def ingredents():
+    return input("Write action (buy, fill, take,remaining,exit):\n>")
+
+
+def remaining():
     print("The coffee machine has:\n", water, "of water\n", milk, "of milk\n", coffee, "of coffee beans\n", cups,
           "of disposable cups\n", money, "of money")
-    return input("Write action (buy, fill, take):\n>")
 
 
 def buys():
     global water, milk, coffee, cups, money
-    z = int(input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:\n>"))
-    if z == 1:
+    z = str(input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back – to main menu:\n>"))
+    if z == "1":
         water = water - 250
         coffee = coffee - 16
         cups = cups - 1
         money = money + 4
-        print("The coffee machine has:\n", water, "of water\n", milk, "of milk\n", coffee, "of coffee beans\n",
-              cups, "of disposable cups\n", money, "of money")
-    if z == 2:
+        if water < 0:
+            print("Sorry, not enough water!")
+        elif coffee < 0:
+            print("Sorry, not enough coffee!")
+        elif cups < 0:
+            print("Sorry, not enough cups!")
+        else:
+            print("I have enough resources, making you a coffee!")
+    elif z == "2":
         water = water - 350
         milk = milk - 75
         coffee = coffee - 20
         cups = cups - 1
         money = money + 7
-        print("The coffee machine has:\n", water, "of water\n", milk, "of milk\n", coffee, "of coffee beans\n",
-              cups, "of disposable cups\n", money, "of money")
-    if z == 3:
+        if water < 0:
+            print("Sorry, not enough water!")
+        elif coffee < 0:
+            print("Sorry, not enough coffee!")
+        elif cups < 0:
+            print("Sorry, not enough cups!")
+        elif milk < 0:
+            print("Sorry, not enough milk!")
+        else:
+            print("I have enough resources, making you a coffee!")
+    elif z == "3":
         water = water - 200
         milk = milk - 100
         coffee = coffee - 12
         cups = cups - 1
         money = money + 6
-        print("The coffee machine has:\n", water, "of water\n", milk, "of milk\n", coffee, "of coffee beans\n",
-              cups, "of disposable cups\n", money, "of money")
+        if water < 0:
+            print("Sorry, not enough water!")
+        elif coffee < 0:
+            print("Sorry, not enough coffee!")
+        elif cups < 0:
+            print("Sorry, not enough cups!")
+        elif milk < 0:
+            print("Sorry, not enough milk!")
+        else:
+            print("I have enough resources, making you a coffee!")
+    elif z == "back":
+        ingredents()
 
 
 def fills():
@@ -90,26 +191,30 @@ def fills():
     coffee = coffee + b
     n = int(input("Write how many disposable coffee cups you want to add:\n>"))
     cups = cups + n
-    print("The coffee machine has:\n", water, "of water\n", milk, "of milk\n", coffee, "of coffee beans\n", cups,
-          "of disposable cups\n", money, "of money")
 
 
 def takes():
     global water, milk, coffee, cups, money
     print("I gave you", money,)
     money = money - money
-    print("The coffee machine has:\n", water, "of water\n", milk, "of milk\n", coffee, "of coffee beans\n", cups,
-          "of disposable cups\n", money, "of money")
 
 
 def main():
     ing = ingredents()
     if ing == "buy":
         buys()
+        main()
     elif ing == "fill":
         fills()
+        main()
     elif ing == "take":
         takes()
+        main()
+    elif ing == "remaining":
+        remaining()
+        main()
+    elif ing == "exit":
+        exit()
 
 
 main()
