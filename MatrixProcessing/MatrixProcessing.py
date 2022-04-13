@@ -229,7 +229,7 @@ def invers():
             cofactors[x] = list(cofactors[x])
         for z in range(len(cofactors)):
             for y in range(len(cofactors)):
-                cofactors[z][y] = int(cofactors[z][y]) / determinant
+                cofactors[z][y] = round(int(cofactors[z][y]) / determinant, 2)
         print(f'The result is:')
         for item in cofactors:
             print(*item, sep=' ')
