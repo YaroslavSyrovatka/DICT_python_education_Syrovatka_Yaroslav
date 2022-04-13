@@ -1,3 +1,6 @@
+import itertools
+
+
 def sum_matrix():
     n1, m1 = input('Enter size of first matrix: >').split(" ")
     n1 = int(n1)
@@ -182,6 +185,61 @@ def determinate_matrix():
     print(determinate(matrix1))
 
 
+def invers():
+    n1, m1 = input('Enter matrix size: >').split(" ")
+    n1 = int(n1)
+    m1 = int(m1)
+    matrix1 = []
+    for i in range(1, n1 + 1):
+        ni1 = input('>').split(" ")
+        ni1 = list(map(lambda x: int(x), ni1))
+        while len(ni1) != m1:
+            ni1 = input('>').split(" ")
+            ni1 = list(map(lambda x: int(x), ni1))
+        matrix1.append(ni1)
+
+    def zips(matrix1):
+        return list(itertools.zip_longest(*matrix1))
+
+    def calc(matrix1, x, y):
+        return [n1[:y] + n1[y + 1:] for n1 in (matrix1[:x] + matrix1[x + 1:])]
+
+    def determinate(matrix1):
+        if len(matrix1) == 2:
+            return matrix1[0][0] * matrix1[1][1] - matrix1[0][1] * matrix1[1][0]
+        determinant = 0
+        for x in range(len(matrix1)):
+            determinant += ((-1) ** x) * matrix1[0][x] * determinate(calc(matrix1, 0, x))
+        return determinant
+
+    def inverse_matrix(matrix1):
+        determinant = determinate(matrix1)
+        if len(matrix1) == 2:
+            return [[matrix1[1][1] / determinant, -1 * matrix1[0][1] / determinant],
+                    [-1 * matrix1[1][0] / determinant, matrix1[0][0] / determinant]]
+        cofactors = []
+        for z in range(len(matrix1)):
+            case = []
+            for y in range(len(matrix1)):
+                minored = calc(matrix1, z, y)
+                case.append(((-1)**(z+y)) * determinate(minored))
+            cofactors.append(case)
+        cofactors = zips(cofactors)
+        for x in range(len(cofactors)):
+            cofactors[x] = list(cofactors[x])
+        for z in range(len(cofactors)):
+            for y in range(len(cofactors)):
+                cofactors[z][y] = int(cofactors[z][y]) / determinant
+        print(f'The result is:')
+        for item in cofactors:
+            print(*item, sep=' ')
+
+    if determinate(matrix1) != 0:
+        inverse_matrix(matrix1)
+    else:
+        print('This matrix doesnt have an inverse.')
+
+
 def menu():
     try:
         print('''1.Add matrices
@@ -207,9 +265,9 @@ def menu():
         elif choise == 5:
             determinate_matrix()
             menu()
-        # elif choise == 6:
-        #     invers()
-        #     menu()
+        elif choise == 6:
+            invers()
+            menu()
         elif choise == 0:
             exit()
         else:
