@@ -7,4 +7,14 @@ if number > 0:
         frends[name] = 0
 else:
     print('No one is joining for the party')
+    exit()
+amount = int(input('Enter the total amount:\n>'))
+cost = round(amount/number, 2)
+if int(cost) != cost:
+    a = round(amount/number, 2)
+else:
+    a = round(amount/number)
+for name in frends:
+    frends[name] = a
 print(frends)
+
