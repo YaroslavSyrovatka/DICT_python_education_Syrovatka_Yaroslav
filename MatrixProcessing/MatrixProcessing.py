@@ -154,6 +154,34 @@ def trans_matrix():
         trans_matrix()
 
 
+def determinate_matrix():
+    n1, m1 = input('Enter matrix size: >').split(" ")
+    n1 = int(n1)
+    m1 = int(m1)
+    matrix1 = []
+    for i in range(1, n1 + 1):
+        ni1 = input('>').split(" ")
+        ni1 = list(map(lambda x: int(x), ni1))
+        while len(ni1) != m1:
+            ni1 = input('>').split(" ")
+            ni1 = list(map(lambda x: int(x), ni1))
+        matrix1.append(ni1)
+
+
+    def calc(matrix1, x, y):
+        return [n1[:y] + n1[y + 1:] for n1 in (matrix1[:x] + matrix1[x + 1:])]
+
+
+    def determinate(matrix1):
+        if len(matrix1) == 2:
+            return matrix1[0][0] * matrix1[1][1] - matrix1[0][1] * matrix1[1][0]
+        determinant = 0
+        for x in range(len(matrix1)):
+            determinant += ((-1) ** x) * matrix1[0][x] * determinate(calc(matrix1, 0, x))
+        return determinant
+    print(determinate(matrix1))
+
+
 def menu():
     try:
         print('''1.Add matrices
@@ -176,9 +204,9 @@ def menu():
         elif choise == 4:
             trans_matrix()
             menu()
-        # elif choise == 5:
-        #     determinate_matrix()
-        #     menu()
+        elif choise == 5:
+            determinate_matrix()
+            menu()
         # elif choise == 6:
         #     invers()
         #     menu()
