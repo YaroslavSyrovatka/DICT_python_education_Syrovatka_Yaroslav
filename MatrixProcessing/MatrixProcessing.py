@@ -100,6 +100,60 @@ def multiply_matrix():
         print('The operation cannot be performed.')
 
 
+def trans_matrix():
+    try:
+        print('''1. Main diagonal
+    2. Side diagonal
+    3. Vertical line
+    4. Horizontal line''')
+        choise = int(input('Your choice: >'))
+        n1, m1 = input('Enter matrix size: >').split(" ")
+        n1 = int(n1)
+        m1 = int(m1)
+        matrix1 = []
+        for i in range(1, n1 + 1):
+            ni1 = input('>').split(" ")
+            ni1 = list(map(lambda x: int(x), ni1))
+            while len(ni1) != m1:
+                ni1 = input('>').split(" ")
+                ni1 = list(map(lambda x: int(x), ni1))
+            matrix1.append(ni1)
+        mix = []
+        if choise == 1:
+            for i in range(len(matrix1[0])):
+                rows = []
+                for row in matrix1:
+                    rows.append(row[i])
+                mix.append(rows)
+            print('The result is:')
+            for item in mix:
+                print(*item, sep=' ')
+        elif choise == 2:
+            for i in range(len(matrix1[0])):
+                rows = []
+                for row in matrix1:
+                    rows.append(row[i])
+                mix.append(rows)
+                mix.reverse()
+                rows.reverse()
+            print('The result is:')
+            for item in mix:
+                print(*item, sep=' ')
+        elif choise == 3:
+            for rows in matrix1:
+                rows.reverse()
+            print('The result is:')
+            for item in matrix1:
+                print(*item, sep=' ')
+        elif choise == 4:
+            matrix1.reverse()
+            print('The result is:')
+            for item in matrix1:
+                print(*item, sep=' ')
+    except ValueError:
+        trans_matrix()
+
+
 def menu():
     try:
         print('''1.Add matrices
@@ -119,9 +173,9 @@ def menu():
         elif choise == 3:
             multiply_matrix()
             menu()
-        # elif choise == 4:
-        #     trans_matrix()
-        #     menu()
+        elif choise == 4:
+            trans_matrix()
+            menu()
         # elif choise == 5:
         #     determinate_matrix()
         #     menu()
