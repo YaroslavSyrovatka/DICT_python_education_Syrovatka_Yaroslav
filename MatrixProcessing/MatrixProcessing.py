@@ -60,4 +60,81 @@ def constanta_matrix():
         print(*item, sep=' ')
 
 
-constanta_matrix()
+def multiply_matrix():
+    n1, m1 = input('Enter size of first matrix: >').split(" ")
+    n1 = int(n1)
+    m1 = int(m1)
+    matrix1 = []
+    for i in range(1, n1 + 1):
+        ni1 = input('>').split(" ")
+        ni1 = list(map(lambda x: int(x), ni1))
+        while len(ni1) != m1:
+            ni1 = input('>').split(" ")
+            ni1 = list(map(lambda x: int(x), ni1))
+        matrix1.append(ni1)
+    n2, m2 = input('Enter size of second matrix: >').split(" ")
+    n2 = int(n2)
+    m2 = int(m2)
+    matrix2 = []
+    for i in range(1, n2 + 1):
+        ni2 = input('>').split(" ")
+        ni2 = list(map(lambda x: int(x), ni2))
+        while len(ni2) != m2:
+            ni2 = input('>').split(" ")
+            ni2 = list(map(lambda x: int(x), ni2))
+        matrix2.append(ni2)
+    if m1 == n2:
+        mix = []
+        for i in range(n1):
+            row = []
+            for j in range(m2):
+                num = 0
+                for k in range(m1):
+                    num += matrix1[i][k] * matrix2[k][j]
+                row.append(num)
+            mix.append(row)
+        print('The result is:')
+        for item in mix:
+            print(*item, sep=' ')
+    else:
+        print('The operation cannot be performed.')
+
+
+def menu():
+    try:
+        print('''1.Add matrices
+2.Multiply matrix by a constant
+3.Multiply matrices
+4.Transpose matrix
+5.Calculate a determinant
+6.Inverse matrix
+0.Exit''')
+        choise = int(input('Your choice: >'))
+        if choise == 1:
+            sum_matrix()
+            menu()
+        elif choise == 2:
+            constanta_matrix()
+            menu()
+        elif choise == 3:
+            multiply_matrix()
+            menu()
+        # elif choise == 4:
+        #     trans_matrix()
+        #     menu()
+        # elif choise == 5:
+        #     determinate_matrix()
+        #     menu()
+        # elif choise == 6:
+        #     invers()
+        #     menu()
+        elif choise == 0:
+            exit()
+        else:
+            menu()
+    except ValueError:
+        menu()
+
+
+menu()
+
