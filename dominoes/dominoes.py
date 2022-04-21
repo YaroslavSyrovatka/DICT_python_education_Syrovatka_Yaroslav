@@ -18,8 +18,8 @@ class Dominoes:
     def interface(self):
         """тут будет то вывод данных"""
         print(f"-"*70)
-        print(f"Stock size: {self.stok_domino}")
-        print(f"Computer pieces: {self.computer}")
+        print(f"Stock size: {len(self.stok_domino)}")
+        print(f"Computer pieces: {len(self.computer)}")
         if len(self.snake) > 6:
             print(*self.snake[:3], "...", *self.snake[-3:], sep="")
         else:
@@ -93,6 +93,7 @@ class Dominoes:
                         count += 1
             if count == 8:
                 self.status = "The game is over. It's a draw!"
+                self.interface()
                 print(f"Status: {self.status}")
                 exit()
 
@@ -192,12 +193,12 @@ class Dominoes:
                     self.status = "player"
                     self.chang_status()
                 elif self.find_the_best(s)[0] == self.snake[-1][1]:
-                    self.snake.insert(0, self.find_the_best(s))
+                    self.snake.append(self.find_the_best(s))
                     self.computer.remove(self.find_the_best(s))
                     self.status = "player"
                     self.chang_status()
                 elif self.find_the_best(s)[1] == self.snake[-1][1]:
-                    self.snake.insert(0, self.find_the_best(s)[::-1])
+                    self.snake.append(self.find_the_best(s)[::-1])
                     self.computer.remove(self.find_the_best(s))
                     self.status = "player"
                     self.chang_status()
