@@ -76,6 +76,27 @@ class Dominoes:
             self.status = "player"
 
 
+    def who_wins(self):
+        if len(self.player) == 0:
+            self.status = "The game is over. You won!"
+            print(f"Status: {self.status}")
+            exit()
+        elif len(self.computer) == 0:
+            self.status = "The game is over. The computer won!"
+            print(f"Status: {self.status}")
+            exit()
+        elif self.snake[0][0] == self.snake[-1][-1]:
+            count = 0
+            for item in range(len(self.snake)):
+                for i in self.snake[item]:
+                    if i == self.snake[0][0]:
+                        count += 1
+            if count == 8:
+                self.status = "The game is over. It's a draw!"
+                print(f"Status: {self.status}")
+                exit()
+
+
     def menu(self):
         self.random_domino()
         self.first_step()
