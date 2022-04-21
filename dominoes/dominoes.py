@@ -97,6 +97,64 @@ class Dominoes:
                 exit()
 
 
+    def player_move(self):
+        player = input(">")
+        try:
+            int(player)
+        except ValueError:
+            print("Invalid input. Please try again.")
+            self.player_move()
+        else:
+            if int(player) in range(-len(self.player), len(self.player) + 1):
+                move = int(player)
+                if move == 0:
+                    if len(self.stok_domino) != 0:
+                        self.player.append(self.stok_domino[0])
+                        self.stok_domino.remove(self.stok_domino[0])
+                        self.status = "computer"
+                        self.chang_status()
+                    else:
+                        self.status = "computer"
+                        self.chang_status()
+                elif move > 0:
+                    if self.player[move - 1][0] == self.snake[-1][1]:
+                        self.snake.append(self.player[move - 1])
+                        self.player.remove(self.player[move - 1])
+                        self.status = "computer"
+                        self.chang_status()
+                    elif self.player[move - 1][1] == self.snake[-1][1]:
+                        self.snake.append(self.player[move - 1][::-1])
+                        self.player.remove(self.player[move - 1])
+                        self.status = "computer"
+                        self.chang_status()
+                    else:
+                        print("Illegal move. Please try again.")
+                        self.chang_status()
+                elif move < 0:
+                    if self.player[-move - 1][1] == self.snake[0][0]:
+                        self.snake.insert(0, self.player[-move - 1])
+                        self.player.remove(self.player[-move - 1])
+                        self.status = "computer"
+                        self.chang_status()
+                    elif self.player[-move - 1][0] == self.snake[0][0]:
+                        self.snake.insert(0, self.player[-move - 1][::-1])
+                        self.player.remove(self.player[-move - 1])
+                        self.status = "computer"
+                        self.chang_status()
+                    else:
+                        print("Illegal move. Please try again.")
+                        self.player_move()
+            else:
+                print("Invalid input. Please try again.")
+                self.player_move()
+
+
+
+
+
+
+
+
     def menu(self):
         self.random_domino()
         self.first_step()
