@@ -149,10 +149,65 @@ class Dominoes:
                 self.player_move()
 
 
+    def find_level(self, move):
+        level = list(filter(lambda x: x[0] in move or x[1] in move, self.snake))
+        level_pc = list(filter(lambda x: x[0] in move or x[1] in move, self.computer))
+        level = len(level)+len(level_pc)
+        return level
 
 
+    def find_the_best(self, correct_moves):
+        move = None
+        level = 0
+        for item in correct_moves:
+            current_level = self.find_level(item)
+            if level > current_level:
+                continue
+            move = item
+            level = current_level
+
+        return move
 
 
+    def faind(self, move_pc):
+        if self.snake[0][0] in move_pc:
+            return True
+        if self.snake[-1][1] in move_pc:
+            return True
+
+
+    def computer_move(self):
+        computer = input(">")
+        if computer == "":
+            s = list(filter(self.faind, self.computer))
+            if len(s) > 0:
+                if self.find_the_best(s)[1] == self.snake[0][0]:
+                    self.snake.insert(0, self.find_the_best(s))
+                    self.computer.remove(self.find_the_best(s))
+                    self.status = "player"
+                    self.chang_status()
+                elif self.find_the_best(s)[0] == self.snake[0][0]:
+                    self.snake.insert(0, self.find_the_best(s)[::-1])
+                    self.computer.remove(self.find_the_best(s))
+                    self.status = "player"
+                    self.chang_status()
+                elif self.find_the_best(s)[0] == self.snake[-1][1]:
+                    self.snake.insert(0, self.find_the_best(s))
+                    self.computer.remove(self.find_the_best(s))
+                    self.status = "player"
+                    self.chang_status()
+                elif self.find_the_best(s)[1] == self.snake[-1][1]:
+                    self.snake.insert(0, self.find_the_best(s)[::-1])
+                    self.computer.remove(self.find_the_best(s))
+                    self.status = "player"
+                    self.chang_status()
+            elif len(s) < 1:
+                self.computer.append(self.stok_domino[0])
+                self.stok_domino.remove(self.stok_domino[0])
+                self.status = "player"
+                self.chang_status()
+        else:
+            print("Invalid input. Please try again.")
 
 
     def menu(self):
