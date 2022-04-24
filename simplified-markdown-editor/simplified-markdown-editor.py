@@ -54,9 +54,19 @@ class Markdown:
             print(self.resalt)
             self.init()
         elif user_comand == self.formats[6]:
-            ...
+            rows = self.rows_correct()
+            for row in range(1, rows + 1):
+                user_input = input(f"Row #{row}: > ")
+                self.resalt += f"{row}. {user_input}  \n"
+            print(self.resalt)
+            self.init()
         elif user_comand == self.formats[7]:
-            ...
+            rows = self.rows_correct()
+            for row in range(1, rows + 1):
+                user_input = input(f"Row #{row}: > ")
+                self.resalt += f"* {user_input}  \n"
+            print(self.resalt)
+            self.init()
         elif user_comand == self.formats[8]:
             self.resalt += "\n"
             print(self.resalt)
@@ -86,6 +96,26 @@ class Markdown:
 
         return lvl
 
+
+    def rows_correct(self):
+        rows = input("Number of rows: > ")
+        while rows:
+            try:
+                rows = int(rows)
+            except ValueError:
+                print("Please input number")
+                rows = input("Number of rows: > ")
+                continue
+
+            else:
+                rows = int(rows)
+                if not 0 < rows:
+                    print("Number rows cannot be negative")
+                    rows = input("Number of rows: > ")
+                    continue
+                break
+
+        return rows
 
     def menu(self):
         self.init()
