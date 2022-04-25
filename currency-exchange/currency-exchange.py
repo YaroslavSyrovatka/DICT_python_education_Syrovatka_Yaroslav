@@ -1,19 +1,23 @@
+import requests
+import json
+
+
+
 class Exchange:
     def __init__(self):
         ...
 
 
     def init(self):
-        coins_input = float(input(">"))
-        s = "%g" % coins_input
-        ars = round(coins_input * 0.1, 2)
-        hnl = round(coins_input * 45.2, 2)
-        aud = round(coins_input * 1.37, 2)
-        mad = round(coins_input * 0.9991, 2)
-        print(f"I will get {ars} ARS from the sale of {s} mycoins.")
-        print(f"I will get {hnl} HNL from the sale of {s} mycoins.")
-        print(f"I will get {aud} AUD from the sale of {s} mycoins.")
-        print(f"I will get {mad} MAD from the sale of {s} mycoins.")
+        coins = float(input("Now mach you have>"))
+        curreny = input("name currency>")
+        response = requests.get(f"http://www.floatrates.com/daily/{curreny}.json")
+        other_corr = response.json()
+        d = other_corr.get("usd").get("rate")
+        e = other_corr.get("eur").get("rate")
+        print("eur", round(coins * e, 2))
+        print("usd", round(coins * d, 2))
+
 
 
 
